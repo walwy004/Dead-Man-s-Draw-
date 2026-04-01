@@ -1,12 +1,4 @@
 ﻿  Card.cpp
-C:\Users\b1lby\Documents\Local Uni\DPWC++\Assignments\Dead Man's Draw++\Dead Man's Draw++\Card.cpp(17,16): error C2143: syntax error: missing ';' before 'Card::type'
-C:\Users\b1lby\Documents\Local Uni\DPWC++\Assignments\Dead Man's Draw++\Dead Man's Draw++\Card.cpp(17,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\b1lby\Documents\Local Uni\DPWC++\Assignments\Dead Man's Draw++\Dead Man's Draw++\Card.cpp(17,16): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\b1lby\Documents\Local Uni\DPWC++\Assignments\Dead Man's Draw++\Dead Man's Draw++\Card.cpp(17,16): error C2556: 'int Card::type(void) const': overloaded function differs only by return type from 'Card::CardType Card::type(void) const'
-      C:\Users\b1lby\Documents\Local Uni\DPWC++\Assignments\Dead Man's Draw++\Dead Man's Draw++\Card.h(20,11):
-      see declaration of 'Card::type'
-  
-C:\Users\b1lby\Documents\Local Uni\DPWC++\Assignments\Dead Man's Draw++\Dead Man's Draw++\Card.cpp(17,16): error C2371: 'Card::type': redefinition; different basic types
-      C:\Users\b1lby\Documents\Local Uni\DPWC++\Assignments\Dead Man's Draw++\Dead Man's Draw++\Card.h(20,11):
-      see declaration of 'Card::type'
-  
+  Dead Man's Draw++.cpp
+  Generating Code...
+  Dead Man's Draw++.vcxproj -> C:\Users\b1lby\Documents\Local Uni\DPWC++\Assignments\Dead Man's Draw++\Dead Man's Draw++\x64\Debug\Dead Man's Draw++.exe

@@ -1,5 +1,8 @@
 #pragma once
 #include <string>
+#include <vector>
+
+typedef std::vector<Card*> CardCollection;
 
 class Card
 {
@@ -8,7 +11,7 @@ public:
 		Cannon, Chest, Key, Anchor, Sword, Hook, Oracle, Map, Mermaid, Kraken
 	};
 
-private:
+protected:
 	int _value;
 	CardType _type;
 
@@ -17,7 +20,7 @@ public:
 	virtual ~Card();
 	
 	int getValue() const;
-	CardType type() const;
+	const CardType& type() const;
 
 	virtual std::string str() const = 0;
 };
