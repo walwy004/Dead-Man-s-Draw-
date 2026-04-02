@@ -28,4 +28,3 @@ public:
 	CardCollection& getPlayArea();
 	CardCollection& getBank();
 };
-

@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <vector>
+#include "Game.h"
+#include "Player.h"
 
 class Card
 {
@@ -15,12 +17,14 @@ protected:
 
 public:
 	Card(int value, CardType type);
-	virtual ~Card();
+	virtual ~Card() = default;
 	
-	int getValue() const;
-	const CardType& type() const;
-
 	virtual std::string str() const = 0;
+	virtual void play(Game& game, Player& player) = 0;
+	virtual void willAddToBank(Game& game, Player& player) = 0;
+
+	const CardType& type() const;
+	int getValue() const;
 };
 
 typedef std::vector<Card*> CardCollection;
