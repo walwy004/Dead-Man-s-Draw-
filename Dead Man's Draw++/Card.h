@@ -2,8 +2,6 @@
 #include <string>
 #include <vector>
 
-typedef std::vector<Card*> CardCollection;
-
 class Card
 {
 public:
@@ -25,3 +23,4 @@ public:
 	virtual std::string str() const = 0;
 };
 
+typedef std::vector<Card*> CardCollection;

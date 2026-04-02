@@ -1,15 +1,14 @@
 #pragma once
 #include <vector>
 #include "Card.h"
-
-class Player;
+#include "Player.h"
 
 class Game
 {
 protected:
-	std::vector<Player> players;
-	std::vector<Card> deck;
-	std::vector<Card> discardPile;
+	std::vector<Player*> players;
+	CardCollection _deck;
+	CardCollection _discardPile;
 	int _currentPlayerIndex;
 	int _roundNumber;
 	int _turnNumber;
