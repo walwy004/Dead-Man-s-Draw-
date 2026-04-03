@@ -12,16 +12,12 @@ int main()
     // std::cout << GAME_TITLE << std::endl;
 
     Game game;
-    Player player1;
-    Player player2;
-
-    //CannonCard cannon = CannonCard(5);
-    //std::cout << cannon.str() << std::endl;
-    //cannon.play(game, player);
-
     game.startGame();
-    std::cout << player1.getName() << std::endl;
-    std::cout << player2.getName() << std::endl;
+
+    // Testing deck creation
+    for (auto& card : game.getDeck()) {
+        std::cout << card->str() << std::endl;
+    }
 
     return 0;
 }

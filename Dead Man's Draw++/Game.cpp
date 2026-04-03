@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Cards.h"
 #include <iostream>
 
 Game::Game() :
@@ -31,8 +32,26 @@ void Game::startGame()
 	printFinalScore();
 }
 
+// Create a deck of 54 cards: 9 suits x 6 values each
 void Game::createDeck()
 {
+	int cardValues[] = { 2, 3, 4, 5, 6, 7 };
+	int mermaidCardValues[] = { 4, 5, 6, 7, 8, 9 };
+
+	for (int value : cardValues) {
+		_deck.push_back(new CannonCard(value));
+		_deck.push_back(new ChestCard(value));
+		_deck.push_back(new KeyCard(value));
+		_deck.push_back(new SwordCard(value));
+		_deck.push_back(new HookCard(value));
+		_deck.push_back(new OracleCard(value));
+		_deck.push_back(new MapCard(value));
+		_deck.push_back(new KrakenCard(value));
+	}
+
+	for (int value : mermaidCardValues) {
+		_deck.push_back(new MermaidCard(value));
+	}
 }
 
 void Game::shuffleDeck()
