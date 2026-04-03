@@ -56,6 +56,7 @@ void Game::createDeck()
 	}
 }
 
+// Shuffles the created deck of 54 cards
 void Game::shuffleDeck()
 {
 	CardCollection shuffleDeck{ _deck.begin(), _deck.end() };
@@ -65,12 +66,37 @@ void Game::shuffleDeck()
 
 bool Game::playTurn()
 {
+	Player* player = getCurrentPlayer();
+
+	std::cout << "--- Round " << _roundNumber << ", Turn " << _turnNumber << " ---" << std::endl;
+	std::cout << player->getName() << "'s turn." << std::endl;
+	player->printBank();
+
+	while (true) 
+	{
+		// End game if deck is empty
+		if (_deck.empty()) {
+			std::cout << "The deck is empty. Game over!" << std::endl;
+			return true;
+		}
+
+		Card* drawn = drawCard();
+		std::cout << player->getName() << " draws a " << drawn->str() << std::endl;
+	}
+
 	return true;
 }
 
+// Draws top card from the deck
 Card* Game::drawCard()
 {
-	return nullptr;
+	if (_deck.empty()) {
+		return nullptr;
+	}
+
+	Card* topCard = _deck.back();
+	_deck.pop_back();
+	return topCard;
 }
 
 void Game::switchPlayer()
