@@ -20,8 +20,8 @@ void Game::startGame()
 	createDeck();
 	shuffleDeck();
 
-	_players[0] = new Player("p1");
-	_players[1] = new Player("p2");
+	_players[0] = new Player();
+	_players[1] = new Player();
 
 	bool gameOver = false;
 	while (!gameOver) {

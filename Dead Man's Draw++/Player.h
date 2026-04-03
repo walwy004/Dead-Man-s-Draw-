@@ -1,6 +1,4 @@
 #pragma once
-#include <string>
-#include <vector>
 #include "Card.h"
 #include "Game.h"
 
@@ -12,7 +10,7 @@ protected:
 	CardCollection _bank;
 
 public:
-	Player(std::string name);
+	Player();
 	~Player();
 
 	bool playCard(Card* card, Game& game);

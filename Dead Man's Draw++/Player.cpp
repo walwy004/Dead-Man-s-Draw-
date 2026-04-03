@@ -1,7 +1,10 @@
 #include "Player.h"
 
-Player::Player(std::string name) :
-	_name(name)
+std::string names[] = { "Sam", "Billy", "Jen", "Bob", "Sally", "Joe", "Sue",
+"Sasha", "Tina", "Marge" };
+
+Player::Player() :
+	_name(names[rand() % 10])
 {
 }
 
