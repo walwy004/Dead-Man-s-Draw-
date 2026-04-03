@@ -41,6 +41,7 @@ void Game::shuffleDeck()
 
 bool Game::playTurn()
 {
+	return true;
 }
 
 Card* Game::drawCard()

@@ -11,9 +11,11 @@ int main()
     Game game;
     Player player = Player("Test");
 
-    CannonCard cannon = CannonCard(5);
-    std::cout << cannon.str() << std::endl;
-    cannon.play(game, player);
+    //CannonCard cannon = CannonCard(5);
+    //std::cout << cannon.str() << std::endl;
+    //cannon.play(game, player);
+
+    game.startGame();
 
     return 0;
 }
