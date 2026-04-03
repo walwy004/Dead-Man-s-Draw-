@@ -1,6 +1,7 @@
 #include "Player.h"
 
-Player::Player(std::string& name)
+Player::Player(std::string name) :
+	_name(name)
 {
 }
 
@@ -45,15 +46,15 @@ void Player::printBank()
 
 std::string& Player::getName()
 {
-	// TODO: insert return statement here
+	return _name;
 }
 
 CardCollection& Player::getPlayArea()
 {
-	// TODO: insert return statement here
+	return _playArea;
 }
 
 CardCollection& Player::getBank()
 {
-	// TODO: insert return statement here
+	return _bank;
 }

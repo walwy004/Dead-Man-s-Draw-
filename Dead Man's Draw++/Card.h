@@ -1,8 +1,9 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "Game.h"
-#include "Player.h"
+
+class Game;
+class Player;
 
 class Card
 {
@@ -21,7 +22,7 @@ public:
 	
 	virtual std::string str() const = 0;
 	virtual void play(Game& game, Player& player) = 0;
-	virtual void willAddToBank(Game& game, Player& player) = 0;
+	virtual void willAddToBank(Game& game, Player& player) {};
 
 	const CardType& type() const;
 	int getValue() const;

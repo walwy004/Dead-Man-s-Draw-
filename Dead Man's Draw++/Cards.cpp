@@ -1,7 +1,9 @@
 #include "Cards.h"
+#include <iostream>
 
 void CannonCard::play(Game& game, Player& player)
 {
+	std::cout << "I'm a cannon card" << std::endl;
 }
 
 void ChestCard::play(Game& game, Player& player)

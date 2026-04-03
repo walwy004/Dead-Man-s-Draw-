@@ -6,7 +6,7 @@
 class Game
 {
 protected:
-	std::vector<Player*> players;
+	std::vector<Player*> _players;
 	CardCollection _deck;
 	CardCollection _discardPile;
 	int _currentPlayerIndex;
@@ -27,8 +27,8 @@ public:
 	void endGame();
 	void printFinalScore();
 
-	Player& getCurrentPlayer();
-	Player& getOtherPlayer();
+	Player* getCurrentPlayer();
+	Player* getOtherPlayer();
 	CardCollection& getDeck();
 	CardCollection& getDiscardPile();
 };

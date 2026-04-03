@@ -12,7 +12,7 @@ protected:
 	CardCollection _bank;
 
 public:
-	Player(std::string& name);
+	Player(std::string name);
 	~Player();
 
 	bool playCard(Card* card, Game& game);

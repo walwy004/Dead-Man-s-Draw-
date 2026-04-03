@@ -1,6 +1,10 @@
 #include "Game.h"
 
-Game::Game()
+Game::Game() :
+	_players{ nullptr, nullptr },
+	_currentPlayerIndex(0),
+	_roundNumber(1),
+	_turnNumber(1)
 {
 }
 
@@ -30,7 +34,7 @@ void Game::playTurn()
 
 Card* Game::drawCard()
 {
-	
+	return nullptr;
 }
 
 void Game::switchPlayer()
@@ -45,22 +49,22 @@ void Game::printFinalScore()
 {
 }
 
-Player& Game::getCurrentPlayer()
+Player* Game::getCurrentPlayer()
 {
-	// TODO: insert return statement here
+	return _players[_currentPlayerIndex];
 }
 
-Player& Game::getOtherPlayer()
+Player* Game::getOtherPlayer()
 {
-	// TODO: insert return statement here
+	return _players[1 - _currentPlayerIndex];
 }
 
 CardCollection& Game::getDeck()
 {
-	// TODO: insert return statement here
+	return _deck;
 }
 
 CardCollection& Game::getDiscardPile()
 {
-	// TODO: insert return statement here
+	return _discardPile;
 }

@@ -1,8 +1,6 @@
 #include "Card.h"
 #include <vector>
 
-
-
 Card::Card(int value, CardType type) :
 	_value(value), _type(type)
 {
