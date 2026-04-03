@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <iostream>
 
 Game::Game() :
 	_players{ nullptr, nullptr },
@@ -14,10 +15,20 @@ Game::~Game()
 
 void Game::startGame()
 {
-}
+	std::cout << "Starting Dead Man's Draw++" << std::endl;
 
-void Game::initialisePlayers()
-{
+	createDeck();
+	shuffleDeck();
+
+	_players[0] = new Player("p1");
+	_players[1] = new Player("p2");
+
+	bool gameOver = false;
+	while (!gameOver) {
+		gameOver = playTurn();
+	}
+
+	printFinalScore();
 }
 
 void Game::createDeck()
@@ -28,7 +39,7 @@ void Game::shuffleDeck()
 {
 }
 
-void Game::playTurn()
+bool Game::playTurn()
 {
 }
 

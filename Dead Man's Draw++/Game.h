@@ -18,10 +18,9 @@ public:
 	~Game();
 
 	void startGame();
-	void initialisePlayers();
 	void createDeck();
 	void shuffleDeck();
-	void playTurn();
+	bool playTurn();
 	Card* drawCard();
 	void switchPlayer();
 	void endGame();
