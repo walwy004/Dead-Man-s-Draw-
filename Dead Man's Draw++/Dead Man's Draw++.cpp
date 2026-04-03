@@ -14,7 +14,7 @@ int main()
     Game game;
     game.startGame();
 
-    // Testing deck creation
+    // Testing deck creation and shuffling
     for (auto& card : game.getDeck()) {
         std::cout << card->str() << std::endl;
     }

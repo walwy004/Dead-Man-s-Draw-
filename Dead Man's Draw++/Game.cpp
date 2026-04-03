@@ -1,6 +1,8 @@
 #include "Game.h"
 #include "Cards.h"
 #include <iostream>
+#include <algorithm>
+#include <random>
 
 Game::Game() :
 	_players{ nullptr, nullptr },
@@ -56,6 +58,9 @@ void Game::createDeck()
 
 void Game::shuffleDeck()
 {
+	CardCollection shuffleDeck{ _deck.begin(), _deck.end() };
+	std::shuffle(shuffleDeck.begin(), shuffleDeck.end(), std::mt19937{ std::random_device{}() });
+	std::copy(shuffleDeck.begin(), shuffleDeck.end(), _deck.begin());
 }
 
 bool Game::playTurn()
