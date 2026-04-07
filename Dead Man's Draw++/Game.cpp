@@ -88,7 +88,7 @@ bool Game::playTurn()
 
 		if (drawnCardBust) {
 			std::cout << "BUST! " << player->getName() << " loses all cards in play area." << std::endl;
-			return false;
+			return true;
 		}
 	}
 
