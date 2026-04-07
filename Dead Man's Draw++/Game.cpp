@@ -80,8 +80,16 @@ bool Game::playTurn()
 			return true;
 		}
 
+		// Draw the top card
 		Card* drawn = drawCard();
 		std::cout << player->getName() << " draws a " << drawn->str() << std::endl;
+
+		bool drawnCardBust = player->playCard(drawn, *this);
+
+		if (drawnCardBust) {
+			std::cout << "BUST! " << player->getName() << " loses all cards in play area." << std::endl;
+			return false;
+		}
 	}
 
 	return true;

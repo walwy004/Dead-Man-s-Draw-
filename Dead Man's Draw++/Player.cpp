@@ -12,13 +12,21 @@ Player::~Player()
 {
 }
 
+// Returns true if the card causes a bust
 bool Player::playCard(Card* card, Game& game)
 {
-	return false;
-}
+	// Check for duplicate suit in play area
+	for (Card* c : _playArea) {
+		if (c->type() == card->type()) {
+			_playArea.push_back(card);
+			return true;
+		}
+	}
 
-void Player::addToPlayArea(Card* card)
-{
+	// No bust - add to play area then execute ability
+	_playArea.push_back(card);
+	card->play(game, *this);
+	return false;
 }
 
 bool Player::isBust()

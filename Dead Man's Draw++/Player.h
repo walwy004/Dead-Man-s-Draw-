@@ -14,7 +14,6 @@ public:
 	~Player();
 
 	bool playCard(Card* card, Game& game);
-	void addToPlayArea(Card* card);
 	bool isBust();
 	void bankCard(Game& game);
 	void discardPlayArea(CardCollection& discardPile);
