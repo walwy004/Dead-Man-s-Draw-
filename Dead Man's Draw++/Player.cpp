@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <iostream>
 
 std::string names[] = { "Sam", "Billy", "Jen", "Bob", "Sally", "Joe", "Sue",
 "Sasha", "Tina", "Marge" };
@@ -38,8 +39,12 @@ void Player::bankCard(Game& game)
 {
 }
 
-void Player::discardPlayArea(CardCollection& discardPile)
+// Discards all cards in the play area
+void Player::discardPlayArea(Game& game)
 {
+	for (Card* c : _playArea) {
+		game.discardCard(c);
+	}
 }
 
 int Player::calculateScore()

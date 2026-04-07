@@ -22,6 +22,7 @@ public:
 	void shuffleDeck();
 	bool playTurn();
 	Card* drawCard();
+	void discardCard(Card* card);
 	void switchPlayer();
 	void endGame();
 	void printFinalScore();

@@ -64,6 +64,7 @@ void Game::shuffleDeck()
 	std::copy(shuffleDeck.begin(), shuffleDeck.end(), _deck.begin());
 }
 
+// Runs one full player turn. Returns true when turn ends - bust
 bool Game::playTurn()
 {
 	Player* player = getCurrentPlayer();
@@ -88,6 +89,7 @@ bool Game::playTurn()
 
 		if (drawnCardBust) {
 			std::cout << "BUST! " << player->getName() << " loses all cards in play area." << std::endl;
+			player->discardPlayArea(*this);
 			return true;
 		}
 	}
@@ -105,6 +107,14 @@ Card* Game::drawCard()
 	Card* topCard = _deck.back();
 	_deck.pop_back();
 	return topCard;
+}
+
+// Add card to top of discard pile
+void Game::discardCard(Card* card)
+{
+	if (card) {
+		_discardPile.push_back(card);
+	}
 }
 
 void Game::switchPlayer()

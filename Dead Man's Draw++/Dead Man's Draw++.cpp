@@ -14,5 +14,10 @@ int main()
     Game game;
     game.startGame();
 
+    // Testing discarding cards
+    for (Card* c : game.getDiscardPile()) {
+        std::cout << "Discarded " << c->str() << std::endl;
+    }
+
     return 0;
 }
