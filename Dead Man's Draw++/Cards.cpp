@@ -1,9 +1,18 @@
 #include "Cards.h"
+#include "Game.h"
+#include "Player.h"
 #include <iostream>
 
+// Discard the top card (highest value) of any suit from opponents bank
 void CannonCard::play(Game& game, Player& player)
 {
-	std::cout << "I'm a cannon card" << std::endl;
+	Player* opponent = game.getOtherPlayer();
+	CardCollection& opBank = opponent->getBank();
+
+	if (opBank.empty()) {
+		std::cout << "    No cards in other player's Bank. Play continues." << std::endl;
+		return;
+	}
 }
 
 void ChestCard::play(Game& game, Player& player)
@@ -40,6 +49,7 @@ void MapCard::play(Game& game, Player& player)
 
 void MermaidCard::play(Game& game, Player& player)
 {
+	std::cout << "    No effect but Mermaids are worth more." << std::endl;
 }
 
 void KrakenCard::play(Game& game, Player& player)
