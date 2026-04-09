@@ -35,8 +35,15 @@ bool Player::isBust()
 	return false;
 }
 
+// Moves cards from a players play area to the bank
 void Player::bankCards(Game& game)
 {
+	for (Card* c : _playArea) {
+		_bank.push_back(c);
+	}
+	_playArea.clear();
+
+	printBank();
 }
 
 // Discards all cards in the play area
@@ -62,6 +69,10 @@ void Player::printPlayArea()
 
 void Player::printBank()
 {
+	std::cout << _name << "'s Bank:\n";
+	for (Card* c : _bank) {
+		std::cout << "    " << c->str() << std::endl;
+	}
 }
 
 std::string& Player::getName()

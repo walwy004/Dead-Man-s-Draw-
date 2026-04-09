@@ -133,6 +133,7 @@ void Game::discardCard(Card* card)
 	}
 }
 
+// Increase turn and round counters and switches current player
 void Game::advanceTurn()
 {
 	_turnNumber++;
