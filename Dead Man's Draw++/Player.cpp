@@ -53,6 +53,7 @@ void Player::discardPlayArea(Game& game)
 	for (Card* c : _playArea) {
 		game.discardCard(c);
 	}
+	_playArea.clear();
 }
 
 int Player::calculateScore()

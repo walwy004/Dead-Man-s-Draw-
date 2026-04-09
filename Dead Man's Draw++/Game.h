@@ -24,7 +24,6 @@ public:
 	Card* drawCard();
 	void discardCard(Card* card);
 	void advanceTurn();
-	void endGame();
 	void printFinalScore();
 
 	Player* getCurrentPlayer();

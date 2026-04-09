@@ -145,12 +145,22 @@ void Game::advanceTurn()
 	_currentPlayerIndex = 1 - _currentPlayerIndex;
 }
 
-void Game::endGame()
-{
-}
-
 void Game::printFinalScore()
 {
+	std::cout << "--- Game Over ---\n";
+
+	_players[0]->printBank();
+	_players[1]->printBank();
+
+	int s0 = _players[0]->calculateScore();
+	int s1 = _players[1]->calculateScore();
+
+	if (s0 > s1)
+		std::cout << _players[0]->getName() << " wins!\n";
+	else if (s1 > s0)
+		std::cout << _players[1]->getName() << " wins!\n";
+	else
+		std::cout << "It's a tie!\n";
 }
 
 Player* Game::getCurrentPlayer()
