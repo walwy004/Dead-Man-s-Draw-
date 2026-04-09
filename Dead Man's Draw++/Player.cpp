@@ -54,6 +54,10 @@ int Player::calculateScore()
 
 void Player::printPlayArea()
 {
+	std::cout << _name << "'s Play Area:" << std::endl;
+	for (Card* c : _playArea) {
+		std::cout << "    " << c->str() << std::endl;
+	}
 }
 
 void Player::printBank()

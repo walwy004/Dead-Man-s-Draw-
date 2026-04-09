@@ -90,8 +90,12 @@ bool Game::playTurn()
 		if (drawnCardBust) {
 			std::cout << "BUST! " << player->getName() << " loses all cards in play area." << std::endl;
 			player->discardPlayArea(*this);
+
 			return true;
 		}
+
+		// Show play area and ask whether to draw again
+		player->printPlayArea();
 	}
 
 	return true;
