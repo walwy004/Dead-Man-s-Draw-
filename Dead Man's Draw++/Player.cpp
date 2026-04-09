@@ -1,5 +1,6 @@
 #include "Player.h"
 #include <iostream>
+#include <map>
 
 std::string names[] = { "Sam", "Billy", "Jen", "Bob", "Sally", "Joe", "Sue",
 "Sasha", "Tina", "Marge" };
@@ -56,7 +57,20 @@ void Player::discardPlayArea(Game& game)
 
 int Player::calculateScore()
 {
-	return 0;
+	std::map<Card::CardType, int> scoredCards;
+	for (Card* c : _bank) {
+		Card::CardType t = c->type();
+		if (scoredCards[t] < c->getValue()) {
+			scoredCards[t] = c->getValue();
+		}
+	}
+
+	int total = 0;
+	for (auto& pair : scoredCards) {
+		total += pair.second;
+	}
+
+	return total;
 }
 
 void Player::printPlayArea()
@@ -73,6 +87,7 @@ void Player::printBank()
 	for (Card* c : _bank) {
 		std::cout << "    " << c->str() << std::endl;
 	}
+	std::cout << "| Score: " << calculateScore() << std::endl;
 }
 
 std::string& Player::getName()
