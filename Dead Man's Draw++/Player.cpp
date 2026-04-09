@@ -35,7 +35,7 @@ bool Player::isBust()
 	return false;
 }
 
-void Player::bankCard(Game& game)
+void Player::bankCards(Game& game)
 {
 }
 

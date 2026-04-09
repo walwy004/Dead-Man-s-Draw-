@@ -23,7 +23,7 @@ public:
 	bool playTurn();
 	Card* drawCard();
 	void discardCard(Card* card);
-	void switchPlayer();
+	void advanceTurn();
 	void endGame();
 	void printFinalScore();
 

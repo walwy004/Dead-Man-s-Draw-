@@ -15,7 +15,7 @@ public:
 
 	bool playCard(Card* card, Game& game);
 	bool isBust();
-	void bankCard(Game& game);
+	void bankCards(Game& game);
 	void discardPlayArea(Game& game);
 	int calculateScore();
 	void printPlayArea();

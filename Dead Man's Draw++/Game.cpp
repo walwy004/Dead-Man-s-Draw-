@@ -64,7 +64,7 @@ void Game::shuffleDeck()
 	std::copy(shuffleDeck.begin(), shuffleDeck.end(), _deck.begin());
 }
 
-// Runs one full player turn. Returns true when turn ends - bust
+// Runs one full player turn. Returns false when turn ends - bust
 bool Game::playTurn()
 {
 	Player* player = getCurrentPlayer();
@@ -90,12 +90,24 @@ bool Game::playTurn()
 		if (drawnCardBust) {
 			std::cout << "BUST! " << player->getName() << " loses all cards in play area." << std::endl;
 			player->discardPlayArea(*this);
-
-			return true;
+			advanceTurn();
+			return false;
 		}
 
 		// Show play area and ask whether to draw again
 		player->printPlayArea();
+
+		// Ask to draw again
+		std::string input;
+		std::cout << "\nDraw again? (y/n): ";
+		std::cin >> input;
+
+		// If player wishes to bank
+		if (input != "y") {
+			player->bankCards(*this);
+			advanceTurn();
+			return false;
+		}
 	}
 
 	return true;
@@ -121,8 +133,15 @@ void Game::discardCard(Card* card)
 	}
 }
 
-void Game::switchPlayer()
+void Game::advanceTurn()
 {
+	_turnNumber++;
+	// Round increments after every 2 turns (one per player)
+	if (_turnNumber % 2 == 1) {
+		_roundNumber++;
+	}
+
+	_currentPlayerIndex = 1 - _currentPlayerIndex;
 }
 
 void Game::endGame()
