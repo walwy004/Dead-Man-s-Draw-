@@ -103,6 +103,8 @@ void CannonCard::play(Game& game, Player& player)
 
 void ChestCard::play(Game& game, Player& player)
 {
+	std::cout << "    No immediate effect. If banked with a key, draw as many bonus cards"
+		" from the Discard pile as you moved into your Bank." << std::endl;
 }
 
 void ChestCard::willAddToBank(Game& game, Player& player)
@@ -111,6 +113,8 @@ void ChestCard::willAddToBank(Game& game, Player& player)
 
 void KeyCard::play(Game& game, Player& player)
 {
+	std::cout << "    No immediate effect. If banked with a chest, draw as many bonus cards"
+		" from the Discard pile as you moved into your Bank."  << std::endl;
 }
 
 void KeyCard::willAddToBank(Game& game, Player& player)
