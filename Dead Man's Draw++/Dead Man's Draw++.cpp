@@ -9,7 +9,7 @@ int main()
     // Seed once at the start of the program using current time
     srand(static_cast<unsigned int>(time(nullptr)));
 
-    // std::cout << GAME_TITLE << std::endl;
+    std::cout << GAME_TITLE << std::endl;
 
     Game game;
     game.startGame();
