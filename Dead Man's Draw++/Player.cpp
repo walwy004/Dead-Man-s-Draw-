@@ -1,6 +1,7 @@
 #include "Player.h"
 #include <iostream>
 #include <map>
+#include <algorithm>
 
 std::string names[] = { "Sam", "Billy", "Jen", "Bob", "Sally", "Joe", "Sue",
 "Sasha", "Tina", "Marge" };
@@ -82,18 +83,39 @@ int Player::calculateScore()
 void Player::printPlayArea()
 {
 	std::cout << _name << "'s Play Area:" << std::endl;
-	for (Card* c : _playArea) {
-		std::cout << "    " << c->str() << std::endl;
-	}
+	printCollection(_playArea);
 }
 
 void Player::printBank()
 {
 	std::cout << _name << "'s Bank:\n";
-	for (Card* c : _bank) {
-		std::cout << "    " << c->str() << std::endl;
-	}
+	printCollection(_bank);
 	std::cout << "| Score: " << calculateScore() << std::endl;
+}
+
+// Groups cards by suit, sorts each group highest-to-lowest,
+// prints one line per suit.
+void Player::printCollection(CardCollection& cards)
+{
+	if (cards.empty()) {
+		return;
+	}
+
+	// Group by suit, preserving insertion order of suit keys via map
+	std::map<Card::CardType, CardCollection> grouped;
+	for (Card* c : cards) {
+		grouped[c->type()].push_back(c);
+	}
+
+	for (auto& pair : grouped) {
+		std::sort(pair.second.begin(), pair.second.end(),
+			[](Card* a, Card* b) { return a->getValue() > b->getValue(); });
+
+		std::cout << "    ";
+		for (Card* c : pair.second)
+			std::cout << c->str() << " ";
+		std::cout << std::endl;
+	}
 }
 
 void Player::addToBank(Card* card)

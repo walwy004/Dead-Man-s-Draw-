@@ -20,6 +20,7 @@ public:
 	int calculateScore();
 	void printPlayArea();
 	void printBank();
+	void printCollection(CardCollection& cards);
 	void addToBank(Card* card);
 
 	std::string& getName();
