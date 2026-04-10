@@ -152,6 +152,17 @@ Card* Game::peekCard()
 	return _deck.back();
 }
 
+Card* Game::drawFromDiscardPile()
+{
+	if (_discardPile.empty()) {
+		return nullptr;
+	}
+
+	Card* topCard = _discardPile.back();
+	_discardPile.pop_back();
+	return topCard;
+}
+
 // Increase turn and round counters and switches current player
 void Game::advanceTurn()
 {

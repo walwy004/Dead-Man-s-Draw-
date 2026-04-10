@@ -25,6 +25,7 @@ public:
 	Card* drawCard();
 	void discardCard(Card* card);
 	Card* peekCard();
+	Card* drawFromDiscardPile();
 	void advanceTurn();
 	void printFinalScore();
 	void setTurnBusted();

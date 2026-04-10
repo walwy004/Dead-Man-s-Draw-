@@ -65,7 +65,7 @@ Card* removeTopOfSuit(CardCollection& collection, Card::CardType suit) {
 	return best;
 }
 
-// Play a secondary card into the paly area
+// Play a secondary card into the play area
 static bool playSecondaryCard(Card* card, Game& game, Player& player)
 {
 	std::cout << player.getName() << " draws a " << card->str() << std::endl;
@@ -126,7 +126,7 @@ void SwordCard::play(Game& game, Player& player)
 	CardCollection options = topCardsPerSuit(opBank);
 
 	if (options.empty()) {
-		std::cout << "    No cards in other player's Bank. Play continues.\n";
+		std::cout << "    No cards in other player's Bank. Play continues." << std::endl;
 		return;
 	}
 
@@ -148,7 +148,7 @@ void HookCard::play(Game& game, Player& player)
 
 	if (options.empty())
 	{
-		std::cout << "    No cards in your Bank. Play continues.\n";
+		std::cout << "    No cards in your Bank. Play continues." << std::endl;
 		return;
 	}
 
@@ -172,8 +172,38 @@ void OracleCard::play(Game& game, Player& player)
 	}
 }
 
+// Draw 3 cards from the discard pile, player must play one.
+// Then play that card's ability
 void MapCard::play(Game& game, Player& player)
 {
+	// Check how many are available before drawing
+	int available = game.getDiscardPile().size();
+	if (available == 0) {
+		std::cout << "    No cards in the discard. Play continues." << std::endl;
+		return;
+	}
+
+	int toDraw = std::min(3, available);
+	CardCollection candidates;
+	for (int i = 0; i < toDraw; i++) {
+		Card* c = game.drawFromDiscardPile();
+		if (c) {
+			candidates.push_back(c);
+		}
+	}
+	
+	std::cout << "    Draw 3 cards from the discard and pick one to add to the play area:" << std::endl;
+	int choice = pickCard(candidates);
+	Card* chosen = candidates[choice];
+
+	// Return unchosen cards to discard (preserve order by reversing)
+	for (int i = candidates.size() - 1; i >= 0; --i) {
+		if (i != choice) {
+			game.discardCard(candidates[i]);
+		}
+	}
+
+	playSecondaryCard(chosen, game, player);
 }
 
 void MermaidCard::play(Game& game, Player& player)
