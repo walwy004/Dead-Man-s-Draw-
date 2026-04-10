@@ -10,10 +10,6 @@ Player::Player() :
 {
 }
 
-Player::~Player()
-{
-}
-
 // Returns true if the card causes a bust
 bool Player::playCard(Card* card, Game& game)
 {

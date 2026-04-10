@@ -15,6 +15,24 @@ Game::Game() :
 
 Game::~Game()
 {
+	for (Card* c : _deck) {
+		delete c;
+	}
+	for (Card* c : _discardPile) {
+		delete c;
+	}
+
+	for (int i = 0; i < 2; i++) {
+		if (_players[i]) {
+			for (Card* c : _players[i]->getBank()) { 
+				delete c; 
+			}
+			for (Card* c : _players[i]->getPlayArea()) { 
+				delete c; 
+			}
+			delete _players[i];
+		}
+	}
 }
 
 void Game::startGame()

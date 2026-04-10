@@ -11,7 +11,7 @@ protected:
 
 public:
 	Player();
-	~Player();
+	~Player() = default;
 
 	bool playCard(Card* card, Game& game);
 	bool isBust();
