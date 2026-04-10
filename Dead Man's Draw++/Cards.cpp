@@ -28,6 +28,7 @@ int pickCard(CardCollection& options) {
 		std::cout << "    (" << (i + 1) << ") " << options[i]->str() << std::endl;
 	}
 
+	std::cout << "Which card do you pick? ";
 	int choice = 0;
 	std::cin >> choice;
 	while (choice < 1 || choice > options.size()) {
@@ -36,6 +37,7 @@ int pickCard(CardCollection& options) {
 			std::cout << "    (" << (i + 1) << ") " << options[i]->str() << std::endl;
 		}
 
+		std::cout << "Which card do you pick? ";
 		std::cin >> choice;
 	}
 
@@ -63,6 +65,20 @@ Card* removeTopOfSuit(CardCollection& collection, Card::CardType suit) {
 	return best;
 }
 
+// Play a secondary card into the paly area
+static bool playSecondaryCard(Card* card, Game& game, Player& player)
+{
+	std::cout << player.getName() << " draws a " << card->str() << std::endl;
+	bool bust = player.playCard(card, game);
+	if (bust)
+	{
+		std::cout << "BUST! " << player.getName() << " loses all cards in play area." << std::endl;
+		player.discardPlayArea(game);
+		game.setTurnBusted();
+	}
+	return bust;
+}
+
 // Discard the top card (highest value) of any suit from opponents bank
 void CannonCard::play(Game& game, Player& player)
 {
@@ -83,8 +99,6 @@ void CannonCard::play(Game& game, Player& player)
 		std::cout << "    Discarded " << removed->str() << " from " << opponent->getName() << "'s Bank." << std::endl;
 		game.discardCard(removed);
 	}
-
-	opponent->printBank();
 }
 
 void ChestCard::play(Game& game, Player& player)
@@ -103,8 +117,26 @@ void KeyCard::willAddToBank(Game& game, Player& player)
 {
 }
 
+// Steal the top card of any suit from the opponent's Bank into
+// the current players play area
 void SwordCard::play(Game& game, Player& player)
 {
+	Player* opponent = game.getOtherPlayer();
+	CardCollection& opBank = opponent->getBank();
+	CardCollection options = topCardsPerSuit(opBank);
+
+	if (options.empty()) {
+		std::cout << "    No cards in other player's Bank. Play continues.\n";
+		return;
+	}
+
+	std::cout << "    Steal the top card of any suit from the other player's Bank into your Play Area:" << std::endl;
+	int choice = pickCard(options);
+
+	Card* stolen = removeTopOfSuit(opBank, options[choice]->type());
+	if (stolen) {
+		playSecondaryCard(stolen, game, player);
+	}
 }
 
 void HookCard::play(Game& game, Player& player)

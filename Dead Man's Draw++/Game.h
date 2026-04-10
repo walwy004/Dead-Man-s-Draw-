@@ -12,6 +12,7 @@ protected:
 	int _currentPlayerIndex;
 	int _roundNumber;
 	int _turnNumber;
+	bool _turnBusted;
 
 public:
 	Game();
@@ -26,6 +27,7 @@ public:
 	Card* peekCard();
 	void advanceTurn();
 	void printFinalScore();
+	void setTurnBusted();
 
 	Player* getCurrentPlayer();
 	Player* getOtherPlayer();

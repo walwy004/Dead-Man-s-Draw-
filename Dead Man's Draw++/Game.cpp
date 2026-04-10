@@ -8,7 +8,8 @@ Game::Game() :
 	_players{ nullptr, nullptr },
 	_currentPlayerIndex(0),
 	_roundNumber(1),
-	_turnNumber(1)
+	_turnNumber(1),
+	_turnBusted(false)
 {
 }
 
@@ -68,6 +69,7 @@ void Game::shuffleDeck()
 bool Game::playTurn()
 {
 	Player* player = getCurrentPlayer();
+	_turnBusted = false;
 
 	std::cout << "--- Round " << _roundNumber << ", Turn " << _turnNumber << " ---" << std::endl;
 	std::cout << player->getName() << "'s turn." << std::endl;
@@ -90,6 +92,13 @@ bool Game::playTurn()
 		if (drawnCardBust) {
 			std::cout << "BUST! " << player->getName() << " loses all cards in play area." << std::endl;
 			player->discardPlayArea(*this);
+			advanceTurn();
+			return false;
+		}
+
+		// _turnBusted is set by card abilities (Kraken/Sword/Hook/Map) when
+		// a secondary card busts, the play area is already cleared.
+		if (_turnBusted) {
 			advanceTurn();
 			return false;
 		}
@@ -171,6 +180,12 @@ void Game::printFinalScore()
 		std::cout << _players[1]->getName() << " wins!\n";
 	else
 		std::cout << "It's a tie!\n";
+}
+
+// Card abilities call this when a secondary card causes a bust mid-ability
+void Game::setTurnBusted()
+{
+	_turnBusted = true;
 }
 
 Player* Game::getCurrentPlayer()
