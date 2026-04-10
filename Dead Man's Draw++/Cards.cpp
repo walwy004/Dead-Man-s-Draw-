@@ -266,3 +266,30 @@ void KrakenCard::play(Game& game, Player& player)
 		}
 	}
 }
+
+// All cards drawn the Anchor are immediately moved to the
+// Bank, making them safe even if the player busts afterwards.
+void AnchorCard::play(Game& game, Player& player)
+{
+	std::cout << " Anchor! Cards drawn before the Anchor are safe." << std::endl;
+
+	CardCollection& playArea = player.getPlayArea();
+	CardCollection safeCards;
+
+	for (int i = 0; i < playArea.size() - 1; i++) {
+		safeCards.push_back(playArea[i]);
+	}
+
+	// Remove safe cards from play area and move them directly to bank
+	for (Card* c : safeCards) {
+		auto it = std::find(playArea.begin(), playArea.end(), c);
+		if (it != playArea.end()) {
+			playArea.erase(it);
+		}
+		player.addToBank(c);
+	}
+
+	if (!safeCards.empty()) {
+		std::cout << "    " << safeCards.size() << " card(s) anchored safely to bank." << std::endl;
+	}
+}

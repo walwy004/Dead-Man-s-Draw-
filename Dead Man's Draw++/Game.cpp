@@ -53,7 +53,7 @@ void Game::startGame()
 	printFinalScore();
 }
 
-// Create a deck of 54 cards: 9 suits x 6 values each
+// Create a deck of 60 cards: 10 suits x 6 values each
 void Game::createDeck()
 {
 	int cardValues[] = { 2, 3, 4, 5, 6, 7 };
@@ -68,6 +68,7 @@ void Game::createDeck()
 		_deck.push_back(new OracleCard(value));
 		_deck.push_back(new MapCard(value));
 		_deck.push_back(new KrakenCard(value));
+		_deck.push_back(new AnchorCard(value));
 	}
 
 	for (int value : mermaidCardValues) {

@@ -110,3 +110,15 @@ public:
 	}
 	void play(Game& game, Player& player) override;
 };
+
+
+class AnchorCard : public Card
+{
+public:
+	AnchorCard(int value) : Card(value, CardType::Kraken) {}
+
+	std::string str() const override {
+		return std::format("Anchor({})", getValue());
+	}
+	void play(Game& game, Player& player) override;
+};
