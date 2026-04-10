@@ -6,6 +6,8 @@
 class Game
 {
 protected:
+	static const int MAX_TURNS = 20;
+
 	std::vector<Player*> _players;
 	CardCollection _deck;
 	CardCollection _discardPile;

@@ -83,7 +83,7 @@ void Game::shuffleDeck()
 	std::copy(shuffleDeck.begin(), shuffleDeck.end(), _deck.begin());
 }
 
-// Runs one full player turn. Returns false when turn ends - bust
+// Runs one full player turn. Returns true when game should end
 bool Game::playTurn()
 {
 	Player* player = getCurrentPlayer();
@@ -110,15 +110,17 @@ bool Game::playTurn()
 		if (drawnCardBust) {
 			std::cout << "BUST! " << player->getName() << " loses all cards in play area." << std::endl;
 			player->discardPlayArea(*this);
+			bool end = (_turnNumber >= MAX_TURNS || _deck.empty());
 			advanceTurn();
-			return false;
+			return end;
 		}
 
 		// _turnBusted is set by card abilities (Kraken/Sword/Hook/Map) when
 		// a secondary card busts, the play area is already cleared.
 		if (_turnBusted) {
+			bool end = (_turnNumber >= MAX_TURNS || _deck.empty());
 			advanceTurn();
-			return false;
+			return end;
 		}
 
 		// Show play area and ask whether to draw again
@@ -132,8 +134,9 @@ bool Game::playTurn()
 		// If player wishes to bank
 		if (input != "y") {
 			player->bankCards(*this);
+			bool end = (_turnNumber >= MAX_TURNS || _deck.empty());
 			advanceTurn();
-			return false;
+			return end;
 		}
 	}
 
