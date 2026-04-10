@@ -37,7 +37,6 @@ public:
 		return std::format("Key({})", getValue());
 	}
 	void play(Game& game, Player& player) override;
-	void willAddToBank(Game& game, Player& player) override;
 };
 
 

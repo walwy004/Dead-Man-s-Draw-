@@ -101,24 +101,56 @@ void CannonCard::play(Game& game, Player& player)
 	}
 }
 
+// No immediate effect — combo triggers in willAddToBank().
 void ChestCard::play(Game& game, Player& player)
 {
 	std::cout << "    No immediate effect. If banked with a key, draw as many bonus cards"
 		" from the Discard pile as you moved into your Bank." << std::endl;
 }
 
+// If both Chest and Key are being banked, draw bonus discard
+// cards equal to the number of cards in the play area.
 void ChestCard::willAddToBank(Game& game, Player& player)
 {
+	CardCollection& playArea = player.getPlayArea();
+
+	bool hasKey = false;
+	for (Card* c : playArea) {
+		if (c->type() == CardType::Key) {
+			hasKey = true;
+			break;
+		}
+	}
+
+	if (!hasKey) {
+		return;
+	}
+
+	std::cout << "    Chest and Key activated. Added ";
+	bool anyDrawn = false;
+	for (int i = 0; i < playArea.size(); i++) {
+		Card* bonus = game.drawFromDiscardPile();
+		if (!bonus) {
+			break;
+		}
+		std::cout << bonus->str() << ", ";
+		player.addToBank(bonus);
+		anyDrawn = true;
+	}
+
+	if (anyDrawn) {
+		std::cout << "to your bank." << std::endl;
+	}
+	else {
+		std::cout << "    No cards in the discard for bonus draw. Play continues." << std::endl;
+	}
 }
 
+// No immediate effect — combo is handled by ChestCard::willAddToBank().
 void KeyCard::play(Game& game, Player& player)
 {
 	std::cout << "    No immediate effect. If banked with a chest, draw as many bonus cards"
 		" from the Discard pile as you moved into your Bank."  << std::endl;
-}
-
-void KeyCard::willAddToBank(Game& game, Player& player)
-{
 }
 
 // Steal the top card of any suit from the opponent's Bank into

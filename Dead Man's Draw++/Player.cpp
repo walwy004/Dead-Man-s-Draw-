@@ -39,6 +39,15 @@ bool Player::isBust()
 // Moves cards from a players play area to the bank
 void Player::bankCards(Game& game)
 {
+	int count = _playArea.size();
+
+	// Call willAddToBank on each original play area card
+	for (int i = 0; i < count; ++i)
+	{
+		_playArea[i]->willAddToBank(game, *this);
+	}
+
+	// Move all play area cards (including any bonus cards appended above) to bank
 	for (Card* c : _playArea) {
 		_bank.push_back(c);
 	}
@@ -89,6 +98,11 @@ void Player::printBank()
 		std::cout << "    " << c->str() << std::endl;
 	}
 	std::cout << "| Score: " << calculateScore() << std::endl;
+}
+
+void Player::addToBank(Card* card)
+{
+	_bank.push_back(card);
 }
 
 std::string& Player::getName()
