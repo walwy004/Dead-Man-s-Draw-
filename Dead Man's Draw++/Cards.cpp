@@ -42,6 +42,27 @@ int pickCard(CardCollection& options) {
 	return choice - 1;
 }
 
+// Remove and return the highest-value card of a given suit from a CardCollection
+Card* removeTopOfSuit(CardCollection& collection, Card::CardType suit) {
+	Card* best = nullptr;
+	int bestIdx = -1;
+
+	for (int i = 0; i < collection.size(); i++) {
+		if (collection[i]->type() == suit) {
+			if (best == nullptr || collection[i]->getValue() > best->getValue()) {
+				best = collection[i];
+				bestIdx = i;
+			}
+		}
+	}
+
+	if (bestIdx >= 0) {
+		collection.erase(collection.begin() + bestIdx);
+	}
+
+	return best;
+}
+
 // Discard the top card (highest value) of any suit from opponents bank
 void CannonCard::play(Game& game, Player& player)
 {
@@ -57,7 +78,13 @@ void CannonCard::play(Game& game, Player& player)
 	std::cout << "    Discard the top card of any suit from the other player's Bank to the Discard Pile:" << std::endl;
 	int choice = pickCard(options);
 
-	std::cout << "    Removed " << choice+1 << std::endl;
+	Card* removed = removeTopOfSuit(opBank, options[choice]->type());
+	if (removed) {
+		std::cout << "    Discarded " << removed->str() << " from " << opponent->getName() << "'s Bank." << std::endl;
+		game.discardCard(removed);
+	}
+
+	opponent->printBank();
 }
 
 void ChestCard::play(Game& game, Player& player)
