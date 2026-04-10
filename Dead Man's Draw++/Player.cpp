@@ -61,7 +61,7 @@ int Player::calculateScore()
 	std::map<Card::CardType, int> scoredCards;
 	for (Card* c : _bank) {
 		Card::CardType t = c->type();
-		if (scoredCards[t] < c->getValue()) {
+		if (scoredCards.find(t) == scoredCards.end() || scoredCards[t] < c->getValue()) {
 			scoredCards[t] = c->getValue();
 		}
 	}

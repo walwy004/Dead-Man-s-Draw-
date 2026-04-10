@@ -2,17 +2,62 @@
 #include "Game.h"
 #include "Player.h"
 #include <iostream>
+#include <map>
+
+// Return list of highest-value cards per suit from given collection
+CardCollection topCardsPerSuit(CardCollection& cards) {
+	std::map<Card::CardType, Card*> best;
+	for (Card* c : cards) {
+		Card::CardType t = c->type();
+		if (best.find(t) == best.end() || best[t]->getValue() < c->getValue()) {
+			best[t] = c;
+		}
+	}
+
+	CardCollection result;
+	for (auto& pair : best) {
+		result.push_back(pair.second);
+	}
+
+	return result;
+}
+
+// Display a numbered menu and return the chosen index
+int pickCard(CardCollection& options) {
+	for (int i = 0; i < options.size(); i++) {
+		std::cout << "    (" << (i + 1) << ") " << options[i]->str() << std::endl;
+	}
+
+	int choice = 0;
+	std::cin >> choice;
+	while (choice < 1 || choice > options.size()) {
+		std::cout << "ERROR: Choose a number between these options:" << std::endl;
+		for (int i = 0; i < options.size(); i++) {
+			std::cout << "    (" << (i + 1) << ") " << options[i]->str() << std::endl;
+		}
+
+		std::cin >> choice;
+	}
+
+	return choice - 1;
+}
 
 // Discard the top card (highest value) of any suit from opponents bank
 void CannonCard::play(Game& game, Player& player)
 {
 	Player* opponent = game.getOtherPlayer();
 	CardCollection& opBank = opponent->getBank();
+	CardCollection options = topCardsPerSuit(opBank);
 
-	if (opBank.empty()) {
+	if (options.empty()) {
 		std::cout << "    No cards in other player's Bank. Play continues." << std::endl;
 		return;
 	}
+
+	std::cout << "    Discard the top card of any suit from the other player's Bank to the Discard Pile:" << std::endl;
+	int choice = pickCard(options);
+
+	std::cout << "    Removed " << choice+1 << std::endl;
 }
 
 void ChestCard::play(Game& game, Player& player)
