@@ -29,6 +29,7 @@ public:
 	void advanceTurn();
 	void printFinalScore();
 	void setTurnBusted();
+	bool isTurnBusted();
 
 	Player* getCurrentPlayer();
 	Player* getOtherPlayer();

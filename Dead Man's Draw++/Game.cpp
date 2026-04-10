@@ -199,6 +199,12 @@ void Game::setTurnBusted()
 	_turnBusted = true;
 }
 
+// Check if the turn has already busted (used for KrakenCard ability)
+bool Game::isTurnBusted()
+{
+	return _turnBusted;
+}
+
 Player* Game::getCurrentPlayer()
 {
 	return _players[_currentPlayerIndex];

@@ -206,11 +206,27 @@ void MapCard::play(Game& game, Player& player)
 	playSecondaryCard(chosen, game, player);
 }
 
+// No ability
 void MermaidCard::play(Game& game, Player& player)
 {
 	std::cout << "    No effect but Mermaids are worth more." << std::endl;
 }
 
+// Must draw and play 3 consecutive cards from the deck.
 void KrakenCard::play(Game& game, Player& player)
 {
+	std::cout << "    Draw 3 cards from the deck and play each:" << std::endl;
+
+	for (int i = 0; i < 3; i++) {
+		if (game.getDeck().empty()) {
+			std::cout << "    Deck ran out during Kraken draw.\n";
+			return;
+		}
+
+		Card* drawn = game.drawCard();
+		bool bust = playSecondaryCard(drawn, game, player);
+		if (bust || game.isTurnBusted()) {
+			return;
+		}
+	}
 }
