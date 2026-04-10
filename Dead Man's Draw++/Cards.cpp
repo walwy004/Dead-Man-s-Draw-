@@ -41,6 +41,13 @@ void HookCard::play(Game& game, Player& player)
 
 void OracleCard::play(Game& game, Player& player)
 {
+	Card* topCard = game.peekCard();
+	if (topCard) {
+		std::cout << "    The Oracle sees a " << topCard->str() << std::endl;
+	}
+	else {
+		std::cout << "    The Oracle sees nothing (deck is empty)." << std::endl;
+	}
 }
 
 void MapCard::play(Game& game, Player& player)

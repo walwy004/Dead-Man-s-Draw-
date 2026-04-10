@@ -133,6 +133,16 @@ void Game::discardCard(Card* card)
 	}
 }
 
+// Look at top card from the deck
+Card* Game::peekCard()
+{
+	if (_deck.empty()) {
+		return nullptr;
+	}
+
+	return _deck.back();
+}
+
 // Increase turn and round counters and switches current player
 void Game::advanceTurn()
 {
