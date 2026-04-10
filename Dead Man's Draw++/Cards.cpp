@@ -139,8 +139,26 @@ void SwordCard::play(Game& game, Player& player)
 	}
 }
 
+// Pull the top card of any suit from own bank into play area
+// Then play that card's ability
 void HookCard::play(Game& game, Player& player)
 {
+	CardCollection& bank = player.getBank();
+	CardCollection options = topCardsPerSuit(bank);
+
+	if (options.empty())
+	{
+		std::cout << "    No cards in your Bank. Play continues.\n";
+		return;
+	}
+
+	std::cout << "    Select a highest-value card from any of the suits in your Bank:" << std::endl;
+	int choice = pickCard(options);
+
+	Card* pulled = removeTopOfSuit(bank, options[choice]->type());
+	if (pulled) {
+		playSecondaryCard(pulled, game, player);
+	}	
 }
 
 void OracleCard::play(Game& game, Player& player)
