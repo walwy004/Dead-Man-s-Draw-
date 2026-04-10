@@ -5,7 +5,7 @@
 #include <map>
 
 // Return list of highest-value cards per suit from given collection
-CardCollection topCardsPerSuit(CardCollection& cards) {
+CardCollection topCardsPerSuit(const CardCollection& cards) {
 	std::map<Card::CardType, Card*> best;
 	for (Card* c : cards) {
 		Card::CardType t = c->type();
@@ -23,7 +23,7 @@ CardCollection topCardsPerSuit(CardCollection& cards) {
 }
 
 // Display a numbered menu and return the chosen index
-int pickCard(CardCollection& options) {
+int pickCard(const CardCollection& options) {
 	for (int i = 0; i < options.size(); i++) {
 		std::cout << "    (" << (i + 1) << ") " << options[i]->str() << std::endl;
 	}
@@ -112,7 +112,7 @@ void ChestCard::play(Game& game, Player& player)
 // cards equal to the number of cards in the play area.
 void ChestCard::willAddToBank(Game& game, Player& player)
 {
-	CardCollection& playArea = player.getPlayArea();
+	const CardCollection& playArea = player.getPlayArea();
 
 	bool hasKey = false;
 	for (Card* c : playArea) {

@@ -165,7 +165,7 @@ void Game::discardCard(Card* card)
 }
 
 // Look at top card from the deck
-Card* Game::peekCard()
+Card* Game::peekCard() const
 {
 	if (_deck.empty()) {
 		return nullptr;
@@ -197,7 +197,7 @@ void Game::advanceTurn()
 	_currentPlayerIndex = 1 - _currentPlayerIndex;
 }
 
-void Game::printFinalScore()
+void Game::printFinalScore() const
 {
 	std::cout << "--- Game Over ---\n";
 
@@ -222,7 +222,7 @@ void Game::setTurnBusted()
 }
 
 // Check if the turn has already busted (used for KrakenCard ability)
-bool Game::isTurnBusted()
+bool Game::isTurnBusted() const
 {
 	return _turnBusted;
 }

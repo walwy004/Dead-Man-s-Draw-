@@ -26,12 +26,12 @@ public:
 	bool playTurn();
 	Card* drawCard();
 	void discardCard(Card* card);
-	Card* peekCard();
+	Card* peekCard() const;
 	Card* drawFromDiscardPile();
 	void advanceTurn();
-	void printFinalScore();
+	void printFinalScore() const;
 	void setTurnBusted();
-	bool isTurnBusted();
+	bool isTurnBusted() const;
 
 	Player* getCurrentPlayer();
 	Player* getOtherPlayer();

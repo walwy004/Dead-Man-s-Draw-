@@ -14,13 +14,12 @@ public:
 	~Player() = default;
 
 	bool playCard(Card* card, Game& game);
-	bool isBust();
 	void bankCards(Game& game);
 	void discardPlayArea(Game& game);
-	int calculateScore();
-	void printPlayArea();
-	void printBank();
-	void printCollection(CardCollection& cards);
+	int calculateScore() const;
+	void printPlayArea() const;
+	void printBank() const;
+	void printCollection(const CardCollection& cards) const;
 	void addToBank(Card* card);
 
 	std::string& getName();

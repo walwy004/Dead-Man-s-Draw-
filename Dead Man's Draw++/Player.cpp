@@ -28,11 +28,6 @@ bool Player::playCard(Card* card, Game& game)
 	return false;
 }
 
-bool Player::isBust()
-{
-	return false;
-}
-
 // Moves cards from a players play area to the bank
 void Player::bankCards(Game& game)
 {
@@ -62,7 +57,7 @@ void Player::discardPlayArea(Game& game)
 	_playArea.clear();
 }
 
-int Player::calculateScore()
+int Player::calculateScore() const
 {
 	std::map<Card::CardType, int> scoredCards;
 	for (Card* c : _bank) {
@@ -80,13 +75,13 @@ int Player::calculateScore()
 	return total;
 }
 
-void Player::printPlayArea()
+void Player::printPlayArea() const
 {
 	std::cout << _name << "'s Play Area:" << std::endl;
 	printCollection(_playArea);
 }
 
-void Player::printBank()
+void Player::printBank() const
 {
 	std::cout << _name << "'s Bank:\n";
 	printCollection(_bank);
@@ -95,7 +90,7 @@ void Player::printBank()
 
 // Groups cards by suit, sorts each group highest-to-lowest,
 // prints one line per suit.
-void Player::printCollection(CardCollection& cards)
+void Player::printCollection(const CardCollection& cards) const
 {
 	if (cards.empty()) {
 		return;
